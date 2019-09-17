@@ -6,7 +6,6 @@ import fileinput
 import cpca
 import json
 import numpy as np
-import panda
 # 自定义获取文本手机号函数
 def get_findAll_mobiles(text):
     """
