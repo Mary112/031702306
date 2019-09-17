@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 # encoding: utf-8
 #!/usr/bin/python3
+import unittest
 import re
+import fileinput
 import cpca
 import json
 import numpy as np
@@ -16,7 +18,7 @@ def get_findAll_mobiles(text):
 
 #if __name__ == '__main__':
 
-test=0
+    
 content = input()#content是一整行,moblies【0】是电话号码
 content = re.sub('\.','',content)#删除句号
 for x in content:
@@ -27,9 +29,6 @@ for x in content:
     elif x=='2':
         test=2
         content=re.sub('2!','',content,1)
-        break;
-    else :
-        content=re.sub('3!','',content,1)
         break;
 moblies=get_findAll_mobiles(text=content)#把手机号分出来了
 # 分出姓名
@@ -85,21 +84,13 @@ if test == 2:
         lgcon = re.sub('.+?(?:号)','',lgcon)
         str7 = lgcon
     else :
-            str6 = ''
-    #print (str5)路
-    #print (str6)号
-    #print (str7)详细地址
+        str6 = ''
+#print (str5)路
+#print (str6)号
+#print (str7)详细地址
     df3.insert(5,str6)
     df3.insert(6,str7)
-    #print (df3)
-if (df3[0]=='北京市'):
-    df3[0]='北京'
-if (df3[0]=='天津市'):
-    df3[0]='天津' 
-if (df3[0]=='重庆市'):
-    df3[0]='重庆' 
-if (df3[0]=='上海市'):
-    df3[0]='上海'        
+#print (df3)
 d={}
 d["姓名"]=name
 d["手机"]=moblies[0]
