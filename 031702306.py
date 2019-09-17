@@ -1,5 +1,6 @@
-# encoding: utf-8
 # -*- coding: utf-8 -*-
+# encoding: utf-8
+#!/usr/bin/python3
 import unittest
 import re
 import fileinput
