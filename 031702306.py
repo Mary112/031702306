@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 # encoding: utf-8
+# -*- coding: utf-8 -*-
 #!/usr/bin/python3
 import unittest
 import re
@@ -20,16 +20,18 @@ def get_findAll_mobiles(text):
 
     
 content = input()#content是一整行,moblies【0】是电话号码
-content = re.sub('\.','',content)#删除句号
+
 for x in content:
     if x=='1':
-        test=1
+        flag=1
         content=re.sub('1!','',content,1)
         break;
     elif x=='2':
-        test=2
+        flag=2
         content=re.sub('2!','',content,1)
         break;
+        
+content = re.sub('\.','',content)#切除句号
 moblies=get_findAll_mobiles(text=content)#把手机号分出来了
 # 分出姓名
 n=0
@@ -58,38 +60,36 @@ df3=df2.tolist()
 #输出
     #print ('{"姓名":"',name,'","手机":"',moblies[0],r'","地址":',df3,'}') 
 #    print (df3[3])
-lgcon=df3[3]
-temp = re.match('.+?(?:镇|乡|街道)',lgcon)
-if temp != None :
-    str4 = re.search('.+?(?:镇|乡|街道)',lgcon).group()
-    lgcon = re.sub('.+?(?:镇|乡|街道)','',lgcon)
+l=df3[3]
+zhen = re.match('.+?(?:乡|镇|街道)',l)
+if zhen != None :
+    str = re.search('.+?(?:乡|镇|街道)',l).group()
+    l = re.sub('.+?(?:乡|镇|街道)','',l)
 else :
-    str4=''
-str5=lgcon
-df3[3] = str4
-df3.insert(4,str5)
-#print (str4)
-#print(lgcon)
-if test == 2:
-    temp=re.match('.+?(?:巷|路|街)',lgcon)
-    if temp != None:
-        str5 = re.search('.+?(?:巷|路|街)',lgcon).group()
-        lgcon=re.sub('.+?(?:巷|路|街)','',lgcon)
+    str=''
+road=l
+df3[3] = str
+df3.insert(4,road)
+
+if flag == 2:
+    zhen=re.match('.+?(?:街|巷|路)',l)
+    if zhen != None:
+        road = re.search('.+?(?:街|巷|路)',l).group()
+        l=re.sub('.+?(?:街|巷|路)','',l)
     else:
-        str5=''
-    df3[4]=str5#路
-    temp=re.match('.+?(?:号)',lgcon)
-    if temp != None :
-        str6 = re.search('.+?(?:号)',lgcon).group()
-        lgcon = re.sub('.+?(?:号)','',lgcon)
-        str7 = lgcon
+        road=''
+    df3[4]=road 
+    zhen=re.match('.+?(?:号)',l)
+    if zhen != None :
+        num = re.search('.+?(?:号)',l).group()
+        l = re.sub('.+?(?:号)','',l)
+        rest = l
     else :
-        str6 = ''
-#print (str5)路
-#print (str6)号
-#print (str7)详细地址
-    df3.insert(5,str6)
-    df3.insert(6,str7)
+        num = ''
+
+#print (rest)详细地址
+    df3.insert(5,num)
+    df3.insert(6,rest)
 #print (df3)
 d={}
 d["姓名"]=name
